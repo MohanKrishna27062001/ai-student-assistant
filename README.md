@@ -1,4 +1,3 @@
-# ai-student-assistant
 # AI Study Assistant for Programming Students
 
 ## What This Is
@@ -28,6 +27,7 @@ While teaching 100+ undergraduates across Python and Java/C# labs as a Graduate 
 ## Running This Locally
 
 ### Backend Setup
+
 ```bash
 cd backend
 python3 -m venv venv
@@ -36,3 +36,35 @@ pip install fastapi uvicorn anthropic python-dotenv
 ```
 
 Create a `.env` file in the `backend` folder with your own Anthropic API key:
+
+```
+ANTHROPIC_API_KEY=your_key_here
+```
+
+Start the backend server:
+
+```bash
+uvicorn main:app --reload
+```
+
+The API will be available at `http://localhost:8000`, with interactive docs at `http://localhost:8000/docs`.
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`.
+
+## API Endpoints
+
+- `GET /health` — simple health check to confirm the server is running
+- `POST /api/explain` — main endpoint, accepts a topic/code submission and returns a Claude-generated explanation, practice problems, or guided code feedback
+
+
+## Security Note
+
+The Anthropic API key is loaded from an environment variable on the backend only, and is never exposed to the frontend or committed to version control. The `.env` file and `venv/` folder are excluded from version control via `.gitignore`.
